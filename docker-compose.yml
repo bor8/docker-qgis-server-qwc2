@@ -1,0 +1,19 @@
+version: "3.5"
+services:
+    server:
+        build:
+            context: ./server/
+        ports:
+            - "80:80"
+        restart: always
+        volumes:
+             - ./server/data/:/project/
+    client:
+        build:
+            context: ./client/
+        depends_on:
+            - server
+        ports:
+            - "8081:8081"
+        volumes:
+             - ./client/data/themesConfig.json:/opt/qwc2-demo-app/themesConfig.json
